@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff9ef">
+  <meta name="description" content="A little birthday universe made with love for Celestia.">
+  <title>Happy Birthday, Celestia! 🎂</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --pink: #f5dce4;
+      --cream: #fff9ef;
+      --teal: #326c68;
+      --gold: #d4ad55;
+      --rose: #c96f88;
+      --ink: #51434a;
+      --glass: rgba(255, 255, 255, 0.76);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", sans-serif;
+      color: var(--ink);
+      text-align: center;
+      background:
+        radial-gradient(circle at 8% 5%, #f5dce4, transparent 36%),
+        radial-gradient(circle at 95% 65%, #c8e1d8, transparent 35%),
+        var(--cream);
+      overflow-x: hidden;
+    }
+
+    nav {
+      padding: 22px 14px;
+      color: var(--teal);
+      font: 20px Georgia, serif;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      min-height: 82vh;
+      padding: 65px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      line-height: 1.8;
+      color: var(--teal);
+    }
+
+    h1 {
+      font: normal clamp(44px, 9vw, 86px)/1.08 Georgia, serif;
+      margin: 24px 0;
+    }
+
+    h1 span { color: var(--rose); }
+
+    h2 {
+      font: normal clamp(30px, 5vw, 44px)/1.2 Georgia, serif;
+      margin: 18px 0;
+    }
+
+    p {
+      max-width: 650px;
+      margin: 15px auto;
+      line-height: 1.85;
+    }
+
+    button {
+      background: var(--teal);
+      color: white;
+      border: 0;
+      border-radius: 30px;
+      padding: 14px 24px;
+      font: inherit;
+      cursor: pointer;
+      margin: 12px 6px;
+      box-shadow: 0 6px 18px #326c6822;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 9px 24px #326c6833;
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    section { padding: 65px 20px; }
+
+    .container {
+      width: min(920px, 100%);
+      margin: auto;
+    }
+
+    .divider {
+      width: 65px;
+      height: 2px;
+      background: var(--gold);
+      margin: 22px auto;
+      border-radius: 5px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .photo {
+      padding: 11px;
+      background: var(--glass);
+      border: 1px solid #ffffff;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px #51434a0d;
+      overflow: hidden;
+      transition: transform .25s;
+    }
+
+    .photo:hover { transform: translateY(-5px); }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 14px;
+      background: var(--pink);
+    }
+
+    .photo img:not([src]) { visibility: hidden; }
+
+    .caption {
+      padding: 13px 4px 5px;
+      font: 16px Georgia, serif;
+      line-height: 1.5;
+    }
+
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .reason {
+      background: var(--glass);
+      border: 1px solid white;
+      padding: 25px 16px;
+      border-radius: 22px;
+    }
+
+    .reason .emoji { font-size: 38px; }
+
+    .reason h3 {
+      font: normal 22px Georgia, serif;
+      color: var(--teal);
+    }
+
+    .reason p { font-size: 14px; }
+
+    .letter {
+      background: var(--glass);
+      border-left: 4px solid var(--rose);
+      border-radius: 8px 22px 22px 8px;
+      padding: 28px;
+      text-align: left;
+      max-width: 700px;
+      margin: 30px auto;
+      line-height: 1.9;
+      box-shadow: 0 12px 35px #51434a0b;
+    }
+
+    .letter strong {
+      font: 21px Georgia, serif;
+      color: var(--teal);
+    }
+
+    .letter p {
+      max-width: none;
+      white-space: pre-line;
+    }
+
+    .cake {
+      font-size: clamp(75px, 15vw, 110px);
+      margin: 18px 0;
+      animation: bob 3s ease-in-out infinite;
+    }
+
+    #surprise {
+      display: none;
+      background: #f5dce4d9;
+      border: 1px solid white;
+      padding: 28px;
+      border-radius: 24px;
+      max-width: 650px;
+      margin: 25px auto;
+      line-height: 1.9;
+      animation: appear .65s ease both;
+    }
+
+    #surprise.show { display: block; }
+
+    #surprise h2 { color: var(--teal); }
+
+    footer {
+      padding: 35px 15px;
+      color: #88777d;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .sparkle {
+      position: fixed;
+      top: -35px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: fall linear forwards;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(480deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .hero { min-height: 75vh; padding: 55px 18px; }
+      section { padding: 48px 16px; }
+      .gallery { grid-template-columns: 1fr; gap: 20px; }
+      .photo img { height: 270px; }
+      .reasons { grid-template-columns: 1fr; }
+      .reason { padding: 23px; }
+      .letter { padding: 22px; }
+      nav { font-size: 17px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>✧ A Little Universe for Celestia ✧</nav>
+
+  <header class="hero">
+    <div class="eyebrow">A special day for someone special</div>
+
+    <h1>
+      Happy Birthday,<br>
+      <span>Celestia!</span> 🎂
+    </h1>
+
+    <p>
+      To my favourite mix of chaos, laughter, and lovely memories —
+      today is all about YOU! 💗
+    </p>
+
+    <p>
+      May your next chapter be full of tiny joys, big dreams,
+      unexpected happiness, and beautiful memories.
+    </p>
+
+    <button onclick="goTo('memories')">
+      Open Your Surprise ↓
+    </button>
+  </header>
+
+  <section id="memories">
+    <div class="container">
+      <div class="eyebrow">Little moments, big memories</div>
+      <h2>Our Photo Corner 📸</h2>
+      <div class="divider"></div>
+
+      <p>
+        Three little snapshots of a friendship worth celebrating.
+      </p>
+
+      <div class="gallery">
+        <div class="photo">
+          <img src="photos/photo1.jpg" alt="Our favourite friendship memory"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div class="photo-fallback" style="display:none;padding:35px 5px">
+            🌷 Add photos/photo1.jpg
+          </div>
+          <div class="caption">A memory I'll always keep ♡</div>
+        </div>
+
+        <div class="photo">
+          <img src="photos/photo2.jpg" alt="Our funniest friendship moment"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div class="photo-fallback" style="display:none;padding:35px 5px">
+            😂 Add photos/photo2.jpg
+          </div>
+          <div class="caption">Certified chaos duo!</div>
+        </div>
+
+        <div class="photo">
+          <img src="photos/photo3.jpg" alt="More memories together"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div class="photo-fallback" style="display:none;padding:35px 5px">
+            ✨ Add photos/photo3.jpg
+          </div>
+          <div class="caption">To many more memories!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow">A completely scientific list</div>
+      <h2>Reasons You're Iconic 💅</h2>
+      <div class="divider"></div>
+
+      <div class="reasons">
+        <div class="reason">
+          <div class="emoji">😂</div>
+          <h3>The Laughter</h3>
+          <p>You can turn an ordinary moment into a story we'll laugh about later.</p>
+        </div>
+
+        <div class="reason">
+          <div class="emoji">🌷</div>
+          <h3>The Heart</h3>
+          <p>You make the people around you feel special just by being yourself.</p>
+        </div>
+
+        <div class="reason">
+          <div class="emoji">✨</div>
+          <h3>The Celestia Effect</h3>
+          <p>One-of-a-kind energy. No updates needed. Five stars!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow">From my heart to yours</div>
+      <h2>A Little Birthday Letter 💌</h2>
+      <div class="divider"></div>
+
+      <div class="letter">
+        <strong>To my Celestia, on your birthday ♡</strong>
+
+        <p>Happy Birthday, Shreeja!! 💗
+
+I hope this year brings you so many reasons to smile,
+moments that make you proud of yourself, and people
+who remind you how special you are.
+
+I'm really glad our friendship is part of my story.
+Thank you for the laughs, the school memories, and all
+the little moments that become special just because
+we shared them.
+
+Here's to more inside jokes, more memories, and many
+more birthdays to celebrate. Keep being your wonderfully
+unique self — the world needs your kind of sparkle.
+
+Have the BEST birthday everrr!! 🎂✨
+
+— Your friend ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="eyebrow">One last little thing</div>
+      <h2>Make a Birthday Wish 🎂</h2>
+
+      <div class="cake" aria-hidden="true">🎂</div>
+
+      <p>Close your eyes, make a wish, and tap below!</p>
+
+      <button id="surpriseButton" onclick="revealSurprise()">
+        ✨ Reveal Your Final Surprise ✨
+      </button>
+
+      <div id="surprise" aria-live="polite">
+        <h2>Surprise, Celestia! 💗</h2>
+
+        May your days be gentle, your dreams feel possible,
+        your laughter come easily, and your life be filled
+        with people who celebrate the real YOU.
+
+        <p>
+          You deserve good things, genuine happiness,
+          and all the love this day brings.
+        </p>
+
+        <h2>HAPPY BIRTHDAY!! 🌷🎉</h2>
+        <p>Never forget how wonderfully YOU make this world brighter. ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Made especially for Celestia · 20 October · With ♡
+    <br>
+    A little page, filled with a lot of friendship.
+  </footer>
+
+  <script>
+    function goTo(id) {
+      document.getElementById(id).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    function revealSurprise() {
+      const box = document.getElementById("surprise");
+      const button = document.getElementById("surpriseButton");
+      const isOpen = box.classList.toggle("show");
+
+      button.setAttribute("aria-expanded", String(isOpen));
+      button.textContent = isOpen
+        ? "💗 Hide Surprise"
+        : "✨ Reveal Your Final Surprise ✨";
+
+      if (isOpen) {
+        box.scrollIntoView({ behavior: "smooth", block: "center" });
+        celebrate();
+      }
+    }
+
+    function celebrate() {
+      const symbols = ["✨", "💗", "🎉", "🌷", "⭐"];
+
+      for (let i = 0; i < 35; i++) {
+        const star = document.createElement("span");
+        star.className = "sparkle";
+        star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.fontSize = (14 + Math.random() * 20) + "px";
+        star.style.animationDuration = (2 + Math.random() * 2) + "s";
+
+        document.body.appendChild(star);
+        star.addEventListener("animationend", () => star.remove());
+      }
+    }
+  </script>
+</body>
+</html>
